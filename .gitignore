@@ -1,0 +1,6 @@
+*.tmp
+.DS_Store
+bin
+
+# IDE
+.idea

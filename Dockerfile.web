@@ -1,0 +1,19 @@
+FROM golang:latest as build_base
+RUN apt-get install -y bash ca-certificates git && \
+    mkdir -p $GOPATH/src/github.com/rumsrami/app
+WORKDIR $GOPATH/src/github.com/rumsrami/app
+
+ENV GO111MODULE on
+ENV CGO_ENABLED 0
+ENV APP_ENV staging
+COPY . .
+RUN make build BINARY_NAME=example-service
+RUN chmod a+x ./bin/example-service
+
+FROM scratch
+# Import certs from the builder.
+COPY --from=build_base /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
+COPY --from=build_base /go/src/github.com/rumsrami/app/bin/example-service .
+EXPOSE 4222
+
+ENTRYPOINT ["./example-service"]

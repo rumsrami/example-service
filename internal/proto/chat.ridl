@@ -1,0 +1,59 @@
+webrpc = v1
+
+name = chat
+version = 0.0.1
+
+#-----------------------------
+# System Messages
+#
+
+message Version
+  - webrpcVersion: string
+  - schemaVersion: string
+  - schemaHash: string
+  - appVersion: string
+
+#-------------------------------------------
+#
+# Chat Message
+#
+
+message ChatMessage
+  - fromEmail: string
+    + go.tag.json = fromEmail,omitempty
+
+  - toEmail: string
+    + go.tag.json = toEmail,omitempty
+
+  - messageUUID: string
+    + go.tag.json = messageUUID,omitempty
+
+## Dynamodb partition and sort keys
+## TO#to_Email
+  - PK: string
+    + go.tag.json = pK,omitempty
+
+## FROM#from_email
+  - SK: string
+    + go.tag.json = sK,omitempty
+
+  - messageText: string
+
+  - seen: bool
+  
+  - delivered: bool
+
+  - updatedAt?: timestamp
+    + go.tag.json = updatedAt,omitempty
+
+  - version: string
+
+#-------------------------------------------
+#
+# Actions
+#
+service Chat
+
+- Ping() => (status: bool)
+- Version() => (version: Version)
+- CreateChatMessage(req: ChatMessage) => (res: bool)

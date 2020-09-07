@@ -1,0 +1,23 @@
+version: '3'
+services:
+  example-service:
+    container_name: example-service
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+    depends_on:
+      - "nats.chatapp.com"
+    environment:
+      - PORT=9000
+      - APP_ENV=local
+    ports:
+      - 9000:9000
+    restart: always
+  nats.chatapp.com:
+    image: 'nats:latest'
+    container_name: nats.chatapp.com
+    ports:
+      - 8222:8222
+      - 4222:4222
+      - 6222:6222
+    restart: always
