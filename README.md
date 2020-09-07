@@ -12,21 +12,28 @@ git clone git@github.com:rumsrami/example-service.git
 cd example-service
 ```
 
-#### Using docker-compose
+### Using docker-compose
 
 1. Install docker-cli and docker-compose
-2. From the root folder run the client and the server (client removed)
-``` make compose-up ```
-3. Use postman to ping and get app version
-``` http://0.0.0.0:9000/rpc/Chat/Ping ```
-``` http://0.0.0.0:9000/rpc/Chat/Version ```
+2. From the root folder run the chat service and nats.
+``` 
+make compose-up 
+```
 - > The server will run and listen to requests
 - > Maps ports 9000:9000
-- > `make compose-down` to teardown the created containers and network
+3. Use postman to ping and get app version
+``` 
+http://0.0.0.0:9000/rpc/Chat/Ping
+http://0.0.0.0:9000/rpc/Chat/Version 
+```
+4. Teardown the created containers and network
+```
+make compose-down
+``` 
 
 
-#### Pulumi
-- Pulumi/index.js -> is an example how to build AWS infrastructure for such app
+### Pulumi folder
+- Pulumi/index.js shows how to provision AWS infrastructure for the service
 
-#### .aws folder and .github
-- Show the use of github action for CD
+### aws and github folders
+- Show how to setup github actions
