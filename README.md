@@ -1,8 +1,7 @@
 Example Service
 =================
 
-- This is a stripped down version of the chat service and the in-memory store.
-- I removed the react chat client.
+- This is a stripped down version of a chat service and an in-memory store.
 
 Running locally
 ---
