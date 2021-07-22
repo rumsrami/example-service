@@ -1,7 +1,7 @@
 Example Service
 =================
 
-- This is a stripped down version of a chat service and an in-memory store.
+- This is a stripped down version of a chat service using Nats.
 
 Running locally
 ---
@@ -36,3 +36,6 @@ make compose-down
 
 ### aws and github folders
 - Show how to setup github actions
+
+### Internal folder has a simple channel based in-memory db implementation
+- (Inmemory db)[https://github.com/rumsrami/example-service/blob/master/internal/db/db.go]
